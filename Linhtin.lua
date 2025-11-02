@@ -225,9 +225,15 @@ end)
 	  loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824gvcvhccnbc1aa007fc7324f8f.lua"))()
   end
   })
-  
+
   AddButton(Tab1o, {
-     Name = "Tên tác giả",
+	 Name = "thông tin tác giả:",
+	Callback = function()	
+      loadstring(game:HttpGet("your http"))()
+	end
+	})
+  AddButton(Tab1o, {
+     Name = "Tên tác giả:",
     Callback = function()
 	  loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UIvoi"))()
   end
