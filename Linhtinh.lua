@@ -1,8 +1,9 @@
--- 🌙 LINH TINH HUB - RAYFIELD VERSION
-loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Linh Tinh Hub",
+    Name = "🌙 Linh Tinh Hub",
     LoadingTitle = "Đang khởi động...",
     LoadingSubtitle = "By Minh",
     ConfigurationSaving = {
@@ -13,12 +14,11 @@ local Window = Rayfield:CreateWindow({
     KeySystem = false
 })
 
--- 🌈 TAB CHÍNH
 local Tab0 = Window:CreateTab("⚙️ Chính")
 local Tab1 = Window:CreateTab("📖 Về")
 
 -------------------------------------------------
--- NÚT TRONG TAB CHÍNH
+-- 🧩 NÚT TRONG TAB CHÍNH
 -------------------------------------------------
 
 Tab0:CreateButton({
@@ -31,21 +31,21 @@ Tab0:CreateButton({
 Tab0:CreateButton({
     Name = "Bất tử",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Rawbr10/Roblox-Scripts/refs/heads/main/God%20Mode%20Script%20Universal"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Rawbr10/Roblox-Scripts/main/God%20Mode%20Script%20Universal.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "No Clip",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/refs/heads/main/Noclip.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/main/Noclip.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Inf Jump",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/refs/heads/main/Infjump.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/main/Infjump.lua"))()
     end
 })
 
@@ -59,14 +59,14 @@ Tab0:CreateButton({
 Tab0:CreateButton({
     Name = "Đóng băng",
     Callback = function()
-        loadstring(game:HttpGet('https://pastebin.com/raw/AkJS0PC7'))()
+        loadstring(game:HttpGet("https://pastebin.com/raw/AkJS0PC7"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "R15 Animation",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Boxten-Keyes/music/refs/heads/main/music%23%5Bscripts%5D/music%23%5Bmiscellaneous%5D/music%23%5Bfe%20r15%20animation%20player%5D.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Boxten-Keyes/music/main/music_scripts/fe_r15_animation_player.lua"))()
     end
 })
 
@@ -87,75 +87,75 @@ Tab0:CreateButton({
 Tab0:CreateButton({
     Name = "Ngưng động thời gian",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/refs/heads/main/Stoptime.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/lucphuong/Bloxfruit/main/Stoptime.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Sức mạnh Sigma",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/gObl00x/My-Scripts/refs/heads/main/RSC%20Hub%20by%20gObl00x.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gObl00x/My-Scripts/main/RSC%20Hub%20by%20gObl00x.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Troll Slap Tower",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EnesXVC/FireParts/main/Script"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EnesXVC/FireParts/main/Script.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Emote Troll R15",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/main/GUIS/Emotes.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Tàng hình",
     Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Awesome-Invisible-man-21074"))()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Awesome-Invisible-man-21074.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Nuke",
     Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/-FE-Nuke-Thai-game-32498"))()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/FE-Nuke-Thai-game-32498.lua"))()
     end
 })
 
 Tab0:CreateButton({
-    Name = "Nhấn vào ăn ***",
+    Name = "Nhấn để troll",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/TheqopThe/robax/refs/heads/main/jumpscare.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TheqopThe/robax/main/jumpscare.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Inf Yield",
     Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Linh Tinh",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/amdzy088/Slap-spam-op/refs/heads/main/Slap%20spam%20op"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/amdzy088/Slap-spam-op/main/Slap%20spam%20op.lua"))()
     end
 })
 
 Tab0:CreateButton({
     Name = "Cyborg",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VylikGylik/Script/refs/heads/main/Anime%20Slap%20Tower"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VylikGylik/Script/main/Anime%20Slap%20Tower.lua"))()
     end
 })
 
 -------------------------------------------------
--- TAB VỀ
+-- 📜 TAB VỀ
 -------------------------------------------------
 
 Tab1:CreateButton({
@@ -168,38 +168,39 @@ Tab1:CreateButton({
 Tab1:CreateButton({
     Name = "Tên tác giả",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UIvoi"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UIvoi.lua"))()
     end
 })
 
 Tab1:CreateButton({
     Name = "Minh",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Mainlinhtinh.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/main/Mainlinhtinh.lua"))()
     end
 })
 
 Tab1:CreateButton({
     Name = "Ngày tạo script",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/FindFruitsother.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/main/FindFruitsother.lua"))()
     end
 })
 
 Tab1:CreateButton({
     Name = "Ngày 2/11/2025",
     Callback = function()
-        repeat task.wait() until game:IsLoaded() and game:GetService("Players") and game.Players.LocalPlayer and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/refs/heads/main/TEDDYHUB-FREEMIUMlu"))()
+        repeat task.wait() until game:IsLoaded()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Teddyseetink/Haidepzai/main/TEDDYHUB-FREEMIUM.lua"))()
     end
 })
 
 -------------------------------------------------
--- FPS HIỂN THỊ
+-- 📊 FPS HIỂN THỊ
 -------------------------------------------------
 local RunService = game:GetService("RunService")
-local screenGui = Instance.new("ScreenGui", game.CoreGui)
+local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "FPS_Display"
+screenGui.Parent = game.CoreGui
 
 local label = Instance.new("TextLabel", screenGui)
 label.Size = UDim2.new(0, 120, 0, 30)
@@ -210,9 +211,7 @@ label.Font = Enum.Font.FredokaOne
 label.TextScaled = true
 label.TextStrokeTransparency = 0.2
 
-local hue = 0
-local frames = 0
-local last = tick()
+local hue, frames, last = 0, 0, tick()
 
 RunService.RenderStepped:Connect(function()
     hue = (hue + 0.005) % 1
