@@ -6,15 +6,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/daucobonhi/Ui-Redz-V2
          Animation = "Đang lên chờ tí",
          },
         Key = {
-        KeySystem = true,
+        KeySystem = false,
         Title = "key",
         Description = "",
-        KeyLink = " https://link4sub.com/uLyo",
-        Keys = {"Minhdz"},
+        KeyLink = "",
+        Keys = {"1234"},
         Notifi = {
         Notifications = true,
-        CorrectKey = "Key chạy",
-       IncorrectKey = "Key sai",
+        CorrectKey = "Lên",
+       IncorrectKey = "Kh lên",
        CopyKeyLink = "Copied to Clipboard"
       }
     }
