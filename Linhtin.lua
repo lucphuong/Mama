@@ -1,4 +1,27 @@
-local base64 = "LS0g8J+SjCBMaW5oVGluaEh1YiBBdXRvIExvYWRlciAoYnkgTWluaCkKbG9jYWwgdXJsID0gImh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9sdWNwaHVvbmcvTWluaHNjcmlwdC9yZWZzL2hlYWRzL21haW4vTGluaHRpbmhodWIubHVhIgoKLS0g8J+NhSBIw6FtIHThu4t5IHRo4bujbmcgYmFvCmxvY2FsIGZ1bmN0aW9uIG5vdGlmeSh0aXRsZSwgdGV4dCkKICAgIHBjYWxsKGZ1bmN0aW9uKCkKICAgICAgICBnYW1lOkdldFNlcnZpY2UoIlN0YXJ0ZXJHdWkiKTpTZXRDb3JlKCJTZW5kTm90aWZpY2F0aW9uIiwgewogICAgICAgICAgICBUaXRsZSA9IHRpdGxlOwogICAgICAgICAgICBUZXh0ID0gdGV4dDsKICAgICAgICAgICAgRHVyYXRpb24gPSA0OwogICAgICAgIH0pCiAgICBlbmQpCmVuZAoKbm90aWZ5KCLwn5iDIHNvbGlhciBIdWIiLCAixJBhbmcgdOG6oWkgTGluaFRpbmhIdWIuLi4iKQoKLS0g8J+RgSBU4bqjaSBzY3JpcHQKbG9jYWwgc3VjY2VzcywgcmVzdWx0ID0gcGNhbGwoZnVuY3Rpb24oKQogICAgcmV0dXJuIGdhbWU6SHR0cEdldCh1cmwsIHRydWUpCmVuZCkKCmlmIHN1Y2Nlc3MgYW5kIHJlc3VsdCBhbmQgI3Jlc3VsdCA+IDEwIHRoZW4KICAgIG5vdGlmeSgi4pyTIMKnkyBUaOG6oW5oIGNvbmciLCAixJBow6AgdOG6oWkgdsOga2jDoW5nIExpbmhUaW5oSHViISIpCiAgICBsb2NhbCBydW4sIGVyciA9IHBjYWxsKGxvYWRzdHJpbmcoJHJlc3VsdCkpCiAgICBpZiBub3QgcnVuIHRoZW4KICAgICAgICBub3RpZnkoIuKchCDCp5MgTeG7m2kiLCAixJDhu5FuIHRo4buNIGtoaeG7h24gc2NyaXB0IVxuQ2hpIMSQaeG7h24gOiAiIC4gdG9zdHJpbmcoZXJyKSkKICAgIGVuZAplbHNlCiAgICBub3RpZnkoIuKchCDCp5MgVGjhu6V0IGJhaSIsICLEkOG6oW4gdOG6oWkgTGluaFRpbmhIdWIsIGtp4buBdSB0cmEgbcOgbmggbG/huqFpISIpCmVuZA=="
+local url = "https://raw.githubusercontent.com/lucphuong/Minhscript/refs/heads/main/Linhtinhhub.lua"
 
-local decoded = game:GetService("HttpService"):Base64Decode(base64)
-loadstring(decoded)()
+local function notify(title, text)
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = title;
+            Text = text;
+            Duration = 4;
+        })
+    end)
+end
+
+notify("Đang tải LinhTinhHub...")
+
+local success, result = pcall(function()
+    return game:HttpGet(url, true)
+end)
+
+if success and result and #result > 10 then
+    notify("✅ Thành công", "Đã tải và khởi động LinhTinhHub!")
+    local run, err = pcall(loadstring(result))
+    if not run then
+        notify("⚠️ Lỗi", "Không thể khởi động script!\nChi tiết: " .. tostring(err))
+    end
+else
+    notify("❌ Thất bại", "Không thể tải LinhTinhHub, kiểm tra mạng hoặc link!")
+end
