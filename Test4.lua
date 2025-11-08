@@ -1,101 +1,208 @@
-pcall(function()
-    local key = "SOLIAR"
-    local script_url = "https://raw.githubusercontent.com/lucphuong/Minhscript/main/Soliarhubbeta2.lua"
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Seven7-lua/Roblox/refs/heads/main/Librarys/Orion/Orion.lua"))()
 
-    local function Notify(title, text, time)
-        pcall(function()
-            game.StarterGui:SetCore("SendNotification", {
-                Title = title;
-                Text = text;
-                Duration = time or 5;
-            })
-        end)
-    end
+local Window = OrionLib:MakeWindow({
+    Name = "🌙 Linh Tinh Hub",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "LinhTinhHub"
+})
 
-    Notify("Soliar Hub", "🔐 Hệ thống Key đang khởi động...", 3)
+local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
 
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "SoliarKeyGui"
-    ScreenGui.ResetOnSpawn = false
-    ScreenGui.Parent = game.CoreGui
+OrionLib:MakeNotification({
+	Name = "Linh Tinh Hub",
+	Content = "Đã tải thành công!",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
 
-    local Frame = Instance.new("Frame", ScreenGui)
-    Frame.Size = UDim2.new(0, 320, 0, 170)
-    Frame.Position = UDim2.new(0.5, -160, 0.5, -85)
-    Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    Frame.BorderSizePixel = 0
-    Frame.Active = true
-    pcall(function() Frame.Draggable = true end)
+-- 🦘 Infinite Jump
+local infjumpEnabled = false
+MainTab:AddToggle({
+	Name = "🦘 Infinite Jump",
+	Default = false,
+	Callback = function(Value)
+		infjumpEnabled = Value
+	end    
+})
 
-    local Title = Instance.new("TextLabel", Frame)
-    Title.Size = UDim2.new(1, 0, 0, 40)
-    Title.BackgroundTransparency = 1
-    Title.Text = "🔑 Nhập key để tiếp tục"
-    Title.TextColor3 = Color3.fromRGB(255,255,255)
-    Title.Font = Enum.Font.GothamBold
-    Title.TextSize = 18
-
-    local TextBox = Instance.new("TextBox", Frame)
-    TextBox.Size = UDim2.new(0.9, 0, 0, 40)
-    TextBox.Position = UDim2.new(0.05, 0, 0.35, 0)
-    TextBox.PlaceholderText = "Nhập key..."
-    TextBox.ClearTextOnFocus = false
-    TextBox.Text = ""
-    TextBox.Font = Enum.Font.SourceSans
-    TextBox.TextSize = 18
-    TextBox.TextColor3 = Color3.fromRGB(255,255,255)
-    TextBox.BackgroundColor3 = Color3.fromRGB(50,50,50)
-
-    local Button = Instance.new("TextButton", Frame)
-    Button.Size = UDim2.new(0.9, 0, 0, 36)
-    Button.Position = UDim2.new(0.05, 0, 0.65, 0)
-    Button.Text = "Xác nhận"
-    Button.Font = Enum.Font.GothamBold
-    Button.TextSize = 18
-    Button.TextColor3 = Color3.fromRGB(255,255,255)
-    Button.BackgroundColor3 = Color3.fromRGB(60,180,75)
-
-    local Players = game:GetService("Players")
-    local localPlayer = Players.LocalPlayer
-
-    local function load_remote()
-        Notify("Soliar Hub", "Đang tải script...", 4)
-        local ok, res = pcall(function()
-            return game:HttpGet(script_url, true)
-        end)
-        if not ok or not res or res == "" then
-            Notify("Soliar Hub", "❌ Không tải được script!", 5)
-            return
-        end
-        local fn, err = loadstring(res)
-        if not fn then
-            Notify("Soliar Hub", "⚠️ Lỗi biên dịch script!", 5)
-            return
-        end
-        fn()
-        Notify("Soliar Hub", "🚀 Script đã khởi chạy thành công!", 5)
-    end
-
-    Button.MouseButton1Click:Connect(function()
-        local inputKey = tostring(TextBox.Text or "")
-        if inputKey == key then
-            Notify("Soliar Hub", "✅ Key chính xác! Đang tải script...", 3)
-            pcall(function() ScreenGui:Destroy() end)
-            load_remote()
-        else
-            Notify("Soliar Hub", "Key sai! Bạn sẽ bị kick.", 3)
-            wait(1)
-            pcall(function()
-                if localPlayer and localPlayer.Kick then
-                    localPlayer:Kick("key sai r nhóc")
-                end
-            end)
-        end
-    end)
-
-    TextBox.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            Button:Activate()
-        end
-    end)
+game:GetService("UserInputService").JumpRequest:Connect(function()
+	if infjumpEnabled then
+		game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+	end
 end)
+
+-- ✈️ Fly
+local flying = false
+local flySpeed = 60
+MainTab:AddToggle({
+	Name = "✈️ Fly (G để bật/tắt)",
+	Default = false,
+	Callback = function(Value)
+		flying = Value
+		local plr = game.Players.LocalPlayer
+		local char = plr.Character or plr.CharacterAdded:Wait()
+		local hum = char:FindFirstChildOfClass("Humanoid")
+
+		if flying then
+			local root = char:WaitForChild("HumanoidRootPart")
+			local bv = Instance.new("BodyVelocity", root)
+			bv.Name = "FlyVelocity"
+			bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+			bv.Velocity = Vector3.zero
+
+			game:GetService("RunService").Heartbeat:Connect(function()
+				if flying and root and bv then
+					local dir = Vector3.zero
+					local cam = workspace.CurrentCamera
+					if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
+						dir += cam.CFrame.LookVector
+					end
+					if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
+						dir -= cam.CFrame.LookVector
+					end
+					if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
+						dir -= cam.CFrame.RightVector
+					end
+					if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
+						dir += cam.CFrame.RightVector
+					end
+					bv.Velocity = dir * flySpeed
+				elseif not flying then
+					if bv then bv:Destroy() end
+				end
+			end)
+		else
+			local bv = char:FindFirstChild("FlyVelocity")
+			if bv then bv:Destroy() end
+		end
+	end
+})
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.G then
+		flying = not flying
+		OrionLib:MakeNotification({
+			Name = "Fly",
+			Content = flying and "🕊️ Đã bật bay" or "🛬 Đã tắt bay",
+			Time = 2
+		})
+	end
+end)
+
+-- 🏃 Speed
+local speed = 16
+MainTab:AddSlider({
+	Name = "🏃‍♂️ Speed",
+	Min = 16,
+	Max = 100,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Value)
+		speed = Value
+		game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = Value
+	end    
+})
+
+-- 🦘 Jump Power
+local jumppower = 50
+MainTab:AddSlider({
+	Name = "💥 Jump Power",
+	Min = 50,
+	Max = 300,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 5,
+	ValueName = "Power",
+	Callback = function(Value)
+		jumppower = Value
+		game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").UseJumpPower = true
+		game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = Value
+	end    
+})
+
+-- 📍 Teleport tới người chơi
+MainTab:AddDropdown({
+	Name = "📍 Teleport tới người chơi",
+	Default = "Chọn người chơi",
+	Options = {},
+	Callback = function(selected)
+		local plr = game.Players:FindFirstChild(selected)
+		if plr and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+			game.Players.LocalPlayer.Character:MoveTo(plr.Character.HumanoidRootPart.Position)
+		end
+	end
+})
+
+task.spawn(function()
+	while task.wait(3) do
+		local names = {}
+		for _, v in pairs(game.Players:GetPlayers()) do
+			table.insert(names, v.Name)
+		end
+		MainTab:UpdateDropdown("📍 Teleport tới người chơi", names)
+	end
+end)
+
+-- 🖱️ Click TP
+MainTab:AddToggle({
+	Name = "🖱️ Click TP",
+	Default = false,
+	Callback = function(v)
+		getgenv().ClickTP = v
+	end
+})
+
+local UIS = game:GetService("UserInputService")
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+UIS.InputBegan:Connect(function(input)
+	if getgenv().ClickTP and input.UserInputType == Enum.UserInputType.MouseButton1 then
+		if Mouse.Target then
+			Player.Character:MoveTo(Mouse.Hit.p)
+		end
+	end
+end)
+
+-- 🔘 Toggle UI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "Toggleui"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+local Toggle = Instance.new("TextButton")
+Toggle.Name = "Toggle"
+Toggle.Parent = ScreenGui
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.BackgroundTransparency = 0.5
+Toggle.Position = UDim2.new(0, 0, 0.454, 0)
+Toggle.Size = UDim2.new(0, 50, 0, 50)
+Toggle.Draggable = true
+
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0.2, 0)
+Corner.Parent = Toggle
+
+local Image = Instance.new("ImageLabel")
+Image.Name = "Icon"
+Image.Parent = Toggle
+Image.Size = UDim2.new(1, 0, 1, 0)
+Image.BackgroundTransparency = 1
+Image.Image = "rbxassetid://117239677500065"
+
+local Corner2 = Instance.new("UICorner")
+Corner2.CornerRadius = UDim.new(0.2, 0)
+Corner2.Parent = Image
+
+Toggle.MouseButton1Click:Connect(function()
+  OrionLib:ToggleUi()
+end)
+
+OrionLib:Init()
